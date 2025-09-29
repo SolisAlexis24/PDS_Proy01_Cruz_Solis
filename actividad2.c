@@ -50,9 +50,9 @@ FILE *signal_file;
     printf("Potencia de senal sinusoidal: %f\n", pow_sin);
     printf("Potencia de senal sinusoidal con ruido: %f\n", pow_sin_x_noise);
 
-    quantize_int(sin_x, 5, "q5_signal.dat");
-    quantize_int(sin_x, 9, "q9_signal.dat");
-    quantize_int(sin_x, 11, "q11_signal.dat");
+    quantize_int(sin_x_noise, 5, "q5_signal.dat");
+    quantize_int(sin_x_noise, 9, "q9_signal.dat");
+    quantize_int(sin_x_noise, 11, "q11_signal.dat");
 
     system("gnuplot -p actividad2_graf.gp");
 
