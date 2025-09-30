@@ -1,4 +1,4 @@
-// Definimos nuestras variables constantes para nuestros programa y bibliotecas
+	// Definimos nuestras variables constantes para nuestros programa y bibliotecas
 
 #include<stdio.h>
 #include <stdlib.h>
@@ -36,7 +36,7 @@ float SumatoriaSFT(int veces, float valort) {
 
         resultado += Pcos + Psen;
     }
-    return resultado + (1.125f);  // término a0/2 si corresponde
+    return resultado + (1.125f); // El termino hace referencia a0/2  
 }
 
 int main(){
@@ -51,21 +51,22 @@ int main(){
     // Definimos la aproximacion por medio de SFT
     
     // Obtencion de su representacion espectral
-    float ck[5001], an, bn;
+    float ck[5001],ckFase[5001],  an, bn;
+    
     
     // Guardamos su coeficiente para su representacion grafica espectral
     for(int n = 1; n<5001; n++){
         an = -(2.0 * A * (cos((PI * n) / 2.0) - 1.0)) / (PI * PI * n * n);
         bn = -(A * (2.0 * sin((PI * n) / 2.0) - PI * n)) / (PI * PI * n * n);
         ck[n] = sqrtf(((0.5f * an) * (0.5f* an)) + (((0.5f * bn) * (0.5f* bn))));
+        ckFase[n] = atanf((-bn)/(an));
     }
     //
     //
-
+    // Sumatoria para su aproximacion con serie trigonometrica de fourier
     float Fs2 = 500 * Fo, Ps2=  1 / Fs2;
     float imprimirFST[5000];
     for(int i=0; i<5000; i++)
-        //printf("Resultado aproximado: %f \n", SumatoriaSFT(100, i*Ps2));
         imprimirFST[i] = SumatoriaSFT(1000, i*Ps2);
     
     // Sacamos el error cuadratico medio
@@ -80,6 +81,13 @@ int main(){
         for(int i =0; i< 50; i++)
             fprintf(archivoCK,"%f\n" ,ck[i]);
         fclose(archivoCK);  // cerrar el archivo
+
+    // Sacamos su representacion espectral de fase
+    ckFase[0] = 0.0f;
+    FILE *archivoCK12 = fopen("ckGraFase.dat", "w");;  // puntero al archivo
+        for(int i =0; i< 50; i++)
+            fprintf(archivoCK12,"%f\n" ,ckFase[i]);
+        fclose(archivoCK12);  // cerrar el archivo
 
     // Se guardan los archivos 
         FILE *archivoSFT = fopen("ftSFT.dat", "w");;  // puntero al archivo
