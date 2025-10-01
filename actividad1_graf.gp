@@ -34,5 +34,5 @@ set title "Espectro de fase"
 #unset label
 set xlabel   "nw"
 set ylabel   "phi(nw)"
-plot  "ckGraFase.dat"
+plot  "ckGraFase.dat" with impulses
 pause -1 "Grafica 4: Cerrar para terminar el programa\n"
